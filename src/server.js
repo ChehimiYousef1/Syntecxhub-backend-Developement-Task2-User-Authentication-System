@@ -10,19 +10,16 @@ const runMigrations = require("../migrations/runMigrations");
 
 const app = express();
 
-// ⚡ FULL CORS CONFIG
+// ✅ CORS configuration
 app.use(cors({
   origin: [
-    "https://user-authentication-system-2jky.onrender.com", // production
-    "http://localhost:3000" // local dev
+    "https://user-authentication-system-2jky.onrender.com",
+    "http://localhost:3000"
   ],
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   allowedHeaders: ["Content-Type", "Authorization"],
   credentials: true
 }));
-
-// ⚡ HANDLE PRE-FLIGHT OPTIONS
-app.options("*", cors());
 
 app.use(express.json());
 
@@ -31,7 +28,7 @@ app.get("/", (req, res) => {
   res.send("Welcome from developer Youssef El Chehimi to User Authentication API! Visit /api-docs for Swagger UI.");
 });
 
-// Swagger documentation
+// Swagger docs
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
 // Auth routes
