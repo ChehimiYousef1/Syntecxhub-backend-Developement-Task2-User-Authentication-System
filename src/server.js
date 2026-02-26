@@ -1,6 +1,7 @@
 require("dotenv").config(); // MUST be first line
 
 const express = require("express");
+const cors = require("cors"); // ✅ ADD THIS
 const swaggerUi = require("swagger-ui-express");
 const swaggerDocs = require("./swagger");
 const authRoutes = require("./routes/auth.routes");
@@ -8,6 +9,10 @@ const connectDB = require("../config/db");
 const runMigrations = require("../migrations/runMigrations");
 
 const app = express();
+
+// ✅ ADD THIS RIGHT AFTER app = express()
+app.use(cors()); 
+
 app.use(express.json());
 
 // Home route
@@ -25,13 +30,9 @@ const PORT = process.env.PORT || 3000;
 
 const startServer = async () => {
   try {
-    // Verify env loaded
     console.log("MONGO_URI:", process.env.MONGO_URI ? "✅ loaded" : "❌ undefined");
 
-    // Single DB connection (no duplicate mongoose.connect)
     await connectDB();
-
-    // Run migrations after DB is ready
     await runMigrations();
 
     app.listen(PORT, () => {
