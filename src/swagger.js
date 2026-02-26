@@ -26,7 +26,7 @@ Developed by Youssef El Chehimi.
         description: "Local Development Server"
       },
       {
-        url: "https://user_authentication_system.onrender.com",
+        url: "https://user-authentication-system-2jky.onrender.com",
         description: "Production Server (Render)"
       }
     ]
